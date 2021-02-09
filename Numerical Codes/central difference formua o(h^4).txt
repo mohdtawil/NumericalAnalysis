@@ -1,0 +1,47 @@
+//Ch 6 - lecture 17 -Central difference O(h^4) Optimum StepSize
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+
+void print(double y)
+{
+    cout << fixed << setprecision(10) << y << endl;
+}
+double fun(double x)
+{
+    return cos(x);
+}
+double fun2(double x, double h)
+{
+    return(-1 * fun(x + 2 * h) + 8 * fun(x + h) - 8 * fun(x - h) + fun(x - 2 * h)) / double(12 * h);
+}
+double funOptimumSize(double E, double M)
+{
+    return pow((45 * E / (4*M)), (1.0 / 5));
+}
+
+int main()
+{
+    double Fun_D = -1 * sin(0.8); // First D of cos(x)
+    print(Fun_D);
+
+    cout << "--------------------\n";
+    print(fun2(0.8, 0.1));
+    print(fun2(0.8, 0.01));
+    print(fun2(0.8, 0.001));
+    print(fun2(0.8, 0.0001));
+    cout << "--------------------\n";
+    //The difference between ..
+    cout << Fun_D - fun2(0.8, 0.1) << endl;
+    cout << Fun_D - fun2(0.8, 0.01) << endl;
+    cout << Fun_D - fun2(0.8, 0.001) << endl;
+    cout << Fun_D - fun2(0.8, 0.0001) << endl;
+    cout << "--------------------\n";
+    //optimumStepSize >>
+    //f'''''(x)
+    double hOptimumSize = funOptimumSize((0.5 * pow(10, -9)), 1);
+    print(hOptimumSize);
+    //h=0.01;
+}
+

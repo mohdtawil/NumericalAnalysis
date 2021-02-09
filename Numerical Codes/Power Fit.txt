@@ -1,0 +1,186 @@
+#include<iostream>
+#include<cmath>
+#include<string>
+
+using namespace std;
+
+/*
+
+    Name:   Mohammad Al-Tawil
+    StuID:  118256
+    Sec:    1
+
+*/
+
+
+
+// declare SIZE for the numbers of x y will inserted
+int SIZE;
+
+// declare M that means for named every function with _M_ that mean THE CONSTANT POWER OF EQUATION
+int M; // 3
+
+
+// declare GET_SIZE_AND_POWER function to read from user the M that mean 𝑦 = 𝐴𝑥^M the power in the qustion M = 3 but make it given from user and SIZE the numbers of x y will inserted
+void GET_SIZE_AND_POWER();
+
+
+// declare POW_M_OF_X_VALUE function to claculate a quardatic of x values that mean  xk^3
+double POW_M_OF_X_VALUE(double);
+
+// declare POW_2M_OF_X_VALUE function to claculate of x values  xk^M*2 that mean xk^6
+double POW_2M_OF_X_VALUE(double);
+
+// declare MULTIPLY_Y_VALUES_BY_POW_M_X function to claculate a  of x values  xk^M*yk that mean xk^3*yk
+double MULTIPLY_Y_VALUES_BY_POW_M_X(double, double);
+
+
+// declare this function to claculate a  of x values  summation(xk^M*yk) / summation(xk^M*2) that mean summation(xk^3*yk) / summation(xk^6)
+double DIVISION_OF_SUMMATION_X_POWER_M_MULTIPLY_Y_AND_SUMMATION__POWER_2M_OF_X(double, double);
+
+// declare PRINT_RESULT  function to print final result
+void PRINT_RESULT(double);
+
+// declare GET_VALUES_AND_MAKE_ALL_CALCULATION read value from user and calculate the poer and summation in the function above
+void GET_VALUES_AND_MAKE_ALL_CALCULATION(double&, double&);
+
+
+// main funtion entry point of program
+int main()
+{
+    GET_SIZE_AND_POWER();
+
+    double summation_x_power_m_multiply_y, summation_power_2M_of_x;
+    
+    GET_VALUES_AND_MAKE_ALL_CALCULATION(summation_x_power_m_multiply_y, summation_power_2M_of_x);
+    
+    double result = DIVISION_OF_SUMMATION_X_POWER_M_MULTIPLY_Y_AND_SUMMATION__POWER_2M_OF_X(summation_x_power_m_multiply_y, summation_power_2M_of_x);
+
+    PRINT_RESULT(result);
+
+    return 0;
+}
+
+// implementation to GET_SIZE_AND_POWER function to read from user the M that mean 𝑦 = 𝐴𝑥^M the power in the qustion M = 3 but make it given from user and SIZE the numbers of x y will inserted
+void GET_SIZE_AND_POWER()
+{
+    cout << "ENTER THE NUMBER OF M ( THE CONSTANT POWER OF EQUATION \" which enter number 3 for the given question \" ) : ";
+
+    cin >> M;
+
+    cout << "ENTER THE NUMBER OF N ( NUMBER IF (X,Y) YOU WILL ADDED ) : ";
+
+    cin >> SIZE;
+}
+
+// implementation to POW_M_OF_X_VALUE function to claculate a quardatic of x values that mean  xk^3
+double POW_M_OF_X_VALUE(double X_VALUE)
+{
+    double  MULTI = 1, START = 1;
+
+    while (START <= M)
+    {
+
+        MULTI *= X_VALUE;
+
+        START++;
+    }
+
+    return  MULTI;
+}
+
+// implementation to POW_2M_OF_X_VALUE function to claculate of x values  xk^M*2 that mean xk^6
+double POW_2M_OF_X_VALUE(double X_VALUE)
+{
+    double  MULTI = 1, START = 1;
+
+    while (START <= 2 * M)
+    {
+
+        MULTI *= X_VALUE;
+
+        START++;
+    }
+
+    return  MULTI;
+}
+
+// implementation to MULTIPLY_Y_VALUES_BY_POW_M_X function to claculate a  of x values  xk^M*yk that mean xk^3*yk
+double MULTIPLY_Y_VALUES_BY_POW_M_X(double Y_VALUE, double POW_M_X)
+{
+    return  Y_VALUE * POW_M_X;
+}
+
+// implementation to this function to claculate a  of x values  summation(xk^M*yk) / summation(xk^M*2) that mean summation(xk^3*yk) / summation(xk^6)
+double DIVISION_OF_SUMMATION_X_POWER_M_MULTIPLY_Y_AND_SUMMATION__POWER_2M_OF_X(double SUMMATION_X_POWER_M_MULTIPLY_Y, double SUMMATION_POWER_2M_OF_X)
+{
+    return  SUMMATION_POWER_2M_OF_X / SUMMATION_X_POWER_M_MULTIPLY_Y;
+}
+
+// implementation to PRINT_RESULT  function to print final result
+void PRINT_RESULT(double RESULT)
+{
+    cout << "\n\n-------------------------------" << endl;
+
+    cout << "\n\n    THE RESULT OF EQUATSION" << endl;
+
+    cout << "\n\t y = " << RESULT << "x^" <<M<< endl;
+
+    cout << "\n\n-------------------------------" << endl;
+}
+
+// implementation to GET_VALUES_AND_MAKE_ALL_CALCULATION read value from user and calculate the poer and summation in the function above
+void GET_VALUES_AND_MAKE_ALL_CALCULATION(double& SUM_OF_X_VALUES_POWER_2M, double& SUM_OF_Y_VALUES_MULTIPLY_OF_POWER_X_VALUES)
+{
+    SUM_OF_X_VALUES_POWER_2M = 0;
+
+    SUM_OF_Y_VALUES_MULTIPLY_OF_POWER_X_VALUES = 0;
+
+    double TEMP_FOR_INPUT_X, TEMP_FOR_INPUT_Y;
+
+    int START = 1;
+
+    while (START <= SIZE)
+    {
+        cout << "---------- ROUND " << START << " ------------" << endl;
+
+        cout << "ENTER A VALUE OF THE X VALUE  " << START << ":(<X>,Y) " << endl;
+
+        cin >> TEMP_FOR_INPUT_X;
+
+        // when read x make a power and summation to SUM_OF_X_VALUES_POWER_2M
+        SUM_OF_X_VALUES_POWER_2M += POW_2M_OF_X_VALUE(TEMP_FOR_INPUT_X);
+
+        cout << "ENTER A VALUE OF THE Y VALUE  " << START << ":(X,<Y>) " << endl;
+
+        cin >> TEMP_FOR_INPUT_Y;
+
+        // when read y make the summation and call MULTIPLY_Y_VALUES_BY_POW_M_X function
+        SUM_OF_Y_VALUES_MULTIPLY_OF_POWER_X_VALUES += MULTIPLY_Y_VALUES_BY_POW_M_X(TEMP_FOR_INPUT_Y, POW_M_OF_X_VALUE(TEMP_FOR_INPUT_X));
+
+        START++;
+    }
+
+}
+
+/*
+
+M=3
+
+xk     yk     xk^M == xk^3      xk^M*yk == xk^3*yk    xk^2*M == xk^6
+2.0   5.1        8.0000               40.8                 64.0
+2.3   7.5        12.167               91.2525              148.036
+2.6   10.6       17.576               186.3056             308.916
+2.9   14.4       24.389               351.2016             594.823
+3.2   19.0       32.768               622.592              1073.74
+-----------------------------------------------------------------------
+                                    1292.1517           2189.51
+
+
+        1292.1517
+     =  ---------   = 0.59015
+        2189.51
+
+final answer:   y = 0.59015x^3
+
+*/

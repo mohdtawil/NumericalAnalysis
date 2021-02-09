@@ -1,0 +1,8 @@
+﻿  Program 2.3.cpp
+C:\Users\asus\Desktop\Mohammad Al-Tawil (118256)\Numerical Analysis Ass 1\Assingment 1\Assingment 1\Program 2.3.cpp(22,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+Program 2.3.obj : error LNK2005: "double __cdecl calculateMyFunction(double)" (?calculateMyFunction@@YANN@Z) already defined in Program 2.2.obj
+Program 2.3.obj : error LNK2005: _main already defined in Program 2.2.obj
+Program 2.3.obj : error LNK2005: "double c_value" (?c_value@@3NA) already defined in Program 2.2.obj
+Program 2.3.obj : error LNK2005: "double yc_value" (?yc_value@@3NA) already defined in Program 2.2.obj
+Program 2.3.obj : error LNK2005: "double err_value" (?err_value@@3NA) already defined in Program 2.2.obj
+C:\Users\asus\Desktop\Mohammad Al-Tawil (118256)\Numerical Analysis Ass 1\Assingment 1\Debug\Assingment 1.exe : fatal error LNK1169: one or more multiply defined symbols found

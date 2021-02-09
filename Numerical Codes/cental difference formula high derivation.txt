@@ -1,0 +1,46 @@
+//Ch 6 - lecture 18 - Central-difference formula for f''(x) of order O(h^2 ) Optimum StepSize
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+
+
+double fun(double x)
+{
+    return cos(x);
+}
+double fun2(double x, double h)
+{
+    return((fun(x + h) + fun(x - h) - 2 * fun(x)) / (double(h*h))); // h^2
+}
+double funOptimumSize(double E, double M)
+{
+    return pow((48 * E /M), (1.0 / 4));
+}
+void print(double y)
+{
+    cout << fixed << setprecision(10) << y << endl;
+}
+int main()
+{
+    double Fun_D = -1 * cos(0.8); // second D of cos(x)
+    print(Fun_D);
+
+    cout << "--------------------\n";
+    cout << "h=0.1 = ";  print(fun2(0.8, 0.1));
+    cout << "h=0.01 = "; print(fun2(0.8, 0.01));
+    cout << "h=0.001 = "; print(fun2(0.8, 0.001));
+    cout << "h=0.0001 = "; print(fun2(0.8, 0.0001));
+    cout << "--------------------\n";
+    //The difference between ..
+    cout << "D_B h=0.1 = "<< Fun_D - fun2(0.8, 0.1) << endl;
+    cout << "D_B h=0.01 = "<< Fun_D - fun2(0.8, 0.01) << endl;
+    cout << "D_B h=0.001 = "<< Fun_D - fun2(0.8, 0.001) << endl;
+    cout << "D_B h=0.0001 = "<< Fun_D - fun2(0.8, 0.0001) << endl;
+    cout << "--------------------\n";
+    //optimumStepSize >>
+    //f'''''(x) //M=1   
+    double hOptimumSize = funOptimumSize((0.5 * pow(10, -9)), 1);
+    print(hOptimumSize);
+    //h=0.01;
+}

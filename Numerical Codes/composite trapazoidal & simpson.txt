@@ -1,0 +1,41 @@
+//Ch 7 - lecture 23 - Composite Trapezoidal Rule &  Composite Simpson’s Rule
+
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+
+//The Interval [0,1];
+// M = 5-1 = 4 
+//h=(b-a)/M = 0.25
+
+double fun(double x)
+{
+    return(1+exp(-1*x)*sin(4*x));
+}
+double h = 0.25;
+
+double Composite_Trapezoidal()
+{
+    return
+        (
+            (h / 2.0) * (fun(0) + 2 * fun(0.25) + 2 * fun(0.5) + 2 * fun(0.75) + fun(1))
+        );
+}
+double Composite_Simpson()
+{
+    return
+        (
+            (h / 3.0) * (fun(0) + 4 * fun(0.25) + 2 * fun(0.5) + 4 * fun(0.75) + fun(1))
+        );
+}
+void print(double y)
+{
+    cout << fixed << setprecision(10) << y << endl;
+}
+int main()
+{
+    cout << "Composite_Trapezoidal() : "; print(Composite_Trapezoidal());
+    cout << "Composite_Simpson() : "; print(Composite_Simpson());
+
+}

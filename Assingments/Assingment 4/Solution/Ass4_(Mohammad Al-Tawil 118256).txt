@@ -1,0 +1,180 @@
+
+#include<iostream>
+#include<string>
+#include<cctype>
+#include<cmath>
+
+using namespace std;
+	 
+/*
+	Mohammad Al-Tawil
+	118256
+*/
+
+const int SIZE = 4;
+double POINTES[SIZE]; //= { 0.1 , 0.01 , 0.001 , 0.0001 };
+double SIN_POINTES[SIZE], COS_POINTES[SIZE];
+
+// read point from user
+void readPointes();
+
+//calculate Cos Pointes
+void calculateCosPointes();
+
+// 	calculate Sin Pointes
+void calculateSinPointes();
+
+// 	print Minimum Error
+void printMinimumError(double , double [], int );
+
+// print Values
+void printValues(double [], double [], double []);
+
+// find Minimum
+double findMinimum(double [] , int);
+
+// calculate Minimum Error
+void calculateMinimumError(double []);
+
+// print Result For Part 2 
+void printResultForPart2();
+
+// main function
+void main() {
+
+
+	readPointes();
+
+	calculateCosPointes();
+
+	calculateSinPointes();
+
+	printValues(POINTES, SIN_POINTES, COS_POINTES);
+
+	calculateMinimumError(SIN_POINTES);
+
+	printResultForPart2();
+	
+
+}
+// sample of my outupt
+/*
+	ENTER POINT(1) : 0.1
+	ENTER POINT(2) : 0.01
+	ENTER POINT(3) : 0.001
+	ENTER POINT(4) : 0.0001
+	********************************************
+	SIZE            FORMULA                 ERROR
+	0.1             -0.716161               -0.001195
+	0.01            -0.717344               -1.19559e-05
+	0.001           -0.717356               -1.19559e-07
+	0.0001          -0.717356               -1.19561e-09
+	********************************************
+	********************************************
+	MINIMUM ERROR           SIZE
+	-0.001195               0.1
+	********************************************
+	********************************************
+	FOR PART 2 : 0.001
+	********************************************
+*/
+
+void readPointes() {
+	double point;
+	for (int index = 0; index < 4; index++) {
+		cout << "ENTER POINT(" << index + 1 << ") : ";
+		cin >> point;
+		POINTES[index] = point;
+	}
+}
+void calculateCosPointes() {
+
+	for (int index = 0; index < 4; index++) {
+
+		double RIGHT = cos(0.8 + POINTES[index]);
+
+		double LEFT = cos(0.8 - POINTES[index]);
+
+		double CENTER = 2 * POINTES[index];
+
+		double EQUADION = ((RIGHT - LEFT) / CENTER);
+
+		COS_POINTES[index] = EQUADION;
+
+	}
+}
+
+void calculateSinPointes() {
+
+	for (int index = 0; index < 4; index++) {
+
+		double RIGHT = -1;
+
+		double LEFT = sin(0.8);
+
+		double CENTER = COS_POINTES[index];
+
+		double EQUADION = ((RIGHT * LEFT) - CENTER);
+
+		SIN_POINTES[index] = EQUADION;
+
+	}
+}
+
+void printMinimumError(double minimum_error, double pointes[], int find_error_index) {
+	cout << "********************************************" << endl;
+	cout << "MINIMUM ERROR\t\tSIZE" << endl;
+	cout << minimum_error << "\t\t" << pointes[find_error_index] << endl;
+	cout << "********************************************" << endl;
+}
+
+void printValues(double pointes[], double sin_pointes[], double cos_pointes[]) {
+	cout << "********************************************" << endl;
+	cout << "SIZE\t\tFORMULA\t\t\tERROR" << endl;
+	for (int index = 0; index < 4; index++) {
+		cout << pointes[index] << "\t\t" << cos_pointes[index] << "\t\t" << sin_pointes[index] << endl;
+	}
+	cout << "********************************************" << endl;
+}
+
+double findMinimum(double sin_pointes[], int size) {
+	double MIN_VALUE = sin_pointes[0];
+	for (int index = 0; index < size; index++) {
+		if (sin_pointes[index] < MIN_VALUE) {
+			MIN_VALUE = sin_pointes[index];
+		}
+	}
+	return 	MIN_VALUE;
+}
+
+void calculateMinimumError(double sin_pointes[]) {
+
+	double MINIMUM_ERROR = findMinimum(sin_pointes, ::SIZE);
+
+	int FIND_ERROR = -1;
+
+	int index = 0;
+
+	while (index < ::SIZE) {
+
+		bool CHECK_IS_EQUAL = sin_pointes[index] == MINIMUM_ERROR;
+
+		if (CHECK_IS_EQUAL) {
+			FIND_ERROR = index;
+		}
+
+		index++;
+	}
+
+	printMinimumError(MINIMUM_ERROR, POINTES, FIND_ERROR);
+
+}
+
+
+
+void printResultForPart2() {
+	cout << "********************************************" << endl;
+	cout << "FOR PART 2 : " << pow((3 * 0.5) / 1, (1 / 3)) * POINTES[2] << endl;
+	cout << "********************************************" << endl;
+}
+
